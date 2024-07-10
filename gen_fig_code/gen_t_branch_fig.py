@@ -24,7 +24,7 @@ def Interpolate(tab, x):
     return y
 
 fig, axes = plt.subplots(nrows=1, ncols=2)
-fig.set_figheight(5)
+fig.set_figheight(4.5)
 fig.set_figwidth(12)
 
 # fig a

@@ -11,7 +11,7 @@ dt = 0.01
 param = 'Delta' + str(Delta_1) + 'to' + str(Delta_2) + 'm' + str(m1) + 'to' + str(m2)
 data_path = '../data_submit/Fig2/' + param + '/'
 data = pd.read_csv(data_path + 'return_rates.csv')
-save_fig_name = '../figs/selective_quenches_fig'
+save_fig_name = '../figs/selected_quenches_fig'
 
 def strToComplex(c_str):
     c_str = c_str.replace(" ", "")

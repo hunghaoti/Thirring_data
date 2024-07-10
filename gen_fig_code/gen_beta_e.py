@@ -16,7 +16,7 @@ Delta_2, m2 = -0.9, 0.1
 dt = 0.01
 param = 'Delta' + str(Delta_2) + 'm' + str(m2)
 data_path = '../data_submit/Fig3/' + param
-save_fig_name = '../figs/energyVsBeta_ma'
+save_fig_name = '../figs/energyVsBeta'
 
 # plot beta-e curve
 data = pd.read_csv(data_path + '/beta_e.csv')
