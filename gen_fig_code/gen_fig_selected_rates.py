@@ -13,43 +13,24 @@ data_path = '../data_submit/Fig2/' + param + '/'
 data = pd.read_csv(data_path + 'return_rates.csv')
 save_fig_name = '../figs/selected_quenches_fig'
 
-def strToComplex(c_str):
-    c_str = c_str.replace(" ", "")
-    c_str = c_str.replace(",", "+")
-    c_str = c_str.replace(")", "j")
-    c_str = c_str.replace("(", "")
-    c_str = c_str.replace("+-", "-")
-    return complex(c_str)
-
-
-def GetComplexDataFromFile(file_str, every_n_line):
-    file1 = open(file_str, 'r')
-    Lines = file1.readlines()
-    allList = []
-    for subline in range(0, every_n_line):
-        allList.append([])
-
-    cnt = 0
-    for line in Lines:
-        c = strToComplex(line)
-        list_idx = cnt % every_n_line
-        allList[list_idx].append(c)
-        cnt += 1
-
-    return allList
-
 
 def plot_eigval(inset_ax, t, t_posx = 0.6, t_posy=-1.15):
-    file_name = data_path + 't' + str(t) + "_spec"
-    ys = GetComplexDataFromFile(file_name, 1)
-    c_list = ys[0]
+    file_name = data_path + 't' + str(t) + "_spec.csv"
+    dat = pd.read_csv(file_name, delimiter = ' ')
+    c_list = dat.spectrum
     n_list = []
     r_list = []
     i_list = []
     for i in range(len(c_list)):
-        n_list.append(abs(c_list[i]))
-        r_list.append(c_list[i].real)
-        i_list.append(c_list[i].imag)
+        c_str = c_list[i]
+        c_str = c_str.replace(",", "+")
+        c_str = c_str.replace(")", "")
+        c_str = c_str.replace("(", "")
+        c_str = c_str.replace("+-", "-")
+        c_val = complex(c_str)
+        n_list.append(abs(c_val))
+        r_list.append(c_val.real)
+        i_list.append(c_val.imag)
     #inset_ax.set_frame_on(False)
     max_idx = n_list.index(max(n_list))
     unitcir = plt.Circle((0, 0), 1.0, fill = False)
@@ -61,16 +42,23 @@ def plot_eigval(inset_ax, t, t_posx = 0.6, t_posy=-1.15):
     inset_ax.text(t_posx, t_posy, "$t$="+str(t),fontsize=10)
 
 def plot_eigval_0(inset_ax, t, t_posx = 1.2, t_posy = -1.15):
-    file_name = data_path + 't' + str(t) + "_spec"
-    ys = GetComplexDataFromFile(file_name, 1)
-    c_list = ys[0]
+    file_name = data_path + 't' + str(t) + "_spec.csv"
+    #ys = GetComplexDataFromFile(file_name, 1)
+    dat = pd.read_csv(file_name, delimiter = ' ')
+    c_list = dat.spectrum
     n_list = []
     r_list = []
     i_list = []
     for i in range(len(c_list)):
-        n_list.append(abs(c_list[i]))
-        r_list.append(c_list[i].real)
-        i_list.append(c_list[i].imag)
+        c_str = c_list[i]
+        c_str = c_str.replace(",", "+")
+        c_str = c_str.replace(")", "")
+        c_str = c_str.replace("(", "")
+        c_str = c_str.replace("+-", "-")
+        c_val = complex(c_str)
+        n_list.append(abs(c_val))
+        r_list.append(c_val.real)
+        i_list.append(c_val.imag)
     #inset_ax.set_frame_on(False)
     max_idx = n_list.index(max(n_list))
     unitcir = plt.Circle((0, 0), 1.0, fill = False)
