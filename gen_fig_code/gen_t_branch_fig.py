@@ -105,7 +105,7 @@ if Delta_2 == -0.9:
     b = Interpolate(E_b_dat, e - 0.25 * Delta_2)
     ax.axvline(x = b, color = 'black', linestyle = 'dashed',\
             label = '$\\beta=' + "{:.3f}".format(b) + '$')
-    ax.text(0.13, 7,\
+    ax.text(0.12, 7,\
         '$(m_1a, \Delta_1)=(' + str(speci_m1) + ', ' + str(speci_Delta1) + ')\\rightarrow$')
 ax.legend(bbox_to_anchor=(0.3, 0.60))
 ax.scatter(b0s, t0s, s=5, c='b', label='$t_0$')
@@ -237,7 +237,7 @@ e = selec_dat['e_vumps'].values[0]
 b = Interpolate(E_b_dat, e - 0.25 * Delta_2)
 ax.axvline(x = b, color = 'black', linestyle = 'dashed', zorder = 0,\
         label = '$\\beta=$' + "{:.3f}".format(b))
-ax.text(0.715, 7,'$(m_1a, \Delta_1)=(3, 1.3)\\rightarrow$')
+ax.text(1.025, 7,'$\\leftarrow (m_1a, \Delta_1)=(3, 1.3)$')
 ax.legend(bbox_to_anchor=(0.90, 1))
 ax.scatter(b0s, t0s, s=5, c='b', label='$t_0$')
 ax.scatter(b1s, t1s, s=5, c='orange', label='$t_1$')
@@ -257,5 +257,5 @@ for n, ax in enumerate(axes.flatten()):
 plt.subplots_adjust(hspace=0.35, wspace=0.27, left=0.08, right = 0.96)
 save_path = '../figs/'
 plt.savefig(save_path + 'beta_t_branch.pdf')
-#plt.show()
+plt.show()
 
