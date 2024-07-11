@@ -16,49 +16,30 @@ save_fig_name = '../figs/selected_quenches_fig'
 
 def plot_eigval(inset_ax, t, t_posx = 0.6, t_posy=-1.15):
     file_name = data_path + 't' + str(t) + "_spec.csv"
-    dat = pd.read_csv(file_name, delimiter = ' ')
-    c_list = dat.spectrum
+    dat = pd.read_csv(file_name)
+    real_dat = dat.real
+    imag_dat = dat.imag
     n_list = []
-    r_list = []
-    i_list = []
-    for i in range(len(c_list)):
-        c_str = c_list[i]
-        c_str = c_str.replace(",", "+")
-        c_str = c_str.replace(")", "")
-        c_str = c_str.replace("(", "")
-        c_str = c_str.replace("+-", "-")
-        c_val = complex(c_str)
-        n_list.append(abs(c_val))
-        r_list.append(c_val.real)
-        i_list.append(c_val.imag)
+    for i in range(len(real_dat)):
+        n_list.append(abs(real_dat[i] + 1.0j*imag_dat[i]))
     #inset_ax.set_frame_on(False)
     max_idx = n_list.index(max(n_list))
     unitcir = plt.Circle((0, 0), 1.0, fill = False)
     inset_ax.add_patch(unitcir)
     inset_ax.axis('off')
-    inset_ax.scatter(r_list, i_list, s = 0.2, color = 'b')
-    inset_ax.scatter(r_list[max_idx], i_list[max_idx], s = 10, color = 'r', marker = 'x')
+    inset_ax.scatter(real_dat, imag_dat, s = 0.2, color = 'b')
+    inset_ax.scatter(real_dat[max_idx], imag_dat[max_idx], s = 10, color = 'r', marker = 'x')
     inset_ax.scatter(0, 0, s = 3, color = 'black') ## circle O point
     inset_ax.text(t_posx, t_posy, "$t$="+str(t),fontsize=10)
 
 def plot_eigval_0(inset_ax, t, t_posx = 1.2, t_posy = -1.15):
     file_name = data_path + 't' + str(t) + "_spec.csv"
-    #ys = GetComplexDataFromFile(file_name, 1)
-    dat = pd.read_csv(file_name, delimiter = ' ')
-    c_list = dat.spectrum
+    dat = pd.read_csv(file_name)
+    real_dat = dat.real
+    imag_dat = dat.imag
     n_list = []
-    r_list = []
-    i_list = []
-    for i in range(len(c_list)):
-        c_str = c_list[i]
-        c_str = c_str.replace(",", "+")
-        c_str = c_str.replace(")", "")
-        c_str = c_str.replace("(", "")
-        c_str = c_str.replace("+-", "-")
-        c_val = complex(c_str)
-        n_list.append(abs(c_val))
-        r_list.append(c_val.real)
-        i_list.append(c_val.imag)
+    for i in range(len(real_dat)):
+        n_list.append(abs(real_dat[i] + 1.0j*imag_dat[i]))
     #inset_ax.set_frame_on(False)
     max_idx = n_list.index(max(n_list))
     unitcir = plt.Circle((0, 0), 1.0, fill = False)
@@ -66,8 +47,8 @@ def plot_eigval_0(inset_ax, t, t_posx = 1.2, t_posy = -1.15):
     inset_ax.axis('on')
     inset_ax.set_xlabel('$\operatorname{Re}(\lambda_i)$',fontsize=8,labelpad=-1)
     inset_ax.set_ylabel('$\operatorname{Im}(\lambda_i)$',fontsize=8,labelpad=-6)
-    inset_ax.scatter(r_list, i_list, s = 0.2, color = 'b')
-    inset_ax.scatter(r_list[max_idx], i_list[max_idx], s = 10, color = 'r', marker = 'x')
+    inset_ax.scatter(real_dat, imag_dat, s = 0.2, color = 'b')
+    inset_ax.scatter(real_dat[max_idx], imag_dat[max_idx], s = 10, color = 'r', marker = 'x')
     inset_ax.scatter(0, 0, s = 3, color = 'black') ## circle O point
     inset_ax.text(t_posx, t_posy, "$t$="+str(t),fontsize=10)
 

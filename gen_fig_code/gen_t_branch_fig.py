@@ -257,5 +257,5 @@ for n, ax in enumerate(axes.flatten()):
 plt.subplots_adjust(hspace=0.35, wspace=0.27, left=0.08, right = 0.96)
 save_path = '../figs/'
 plt.savefig(save_path + 'beta_t_branch.pdf')
-plt.show()
+#plt.show()
 
